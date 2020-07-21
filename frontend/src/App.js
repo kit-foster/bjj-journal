@@ -6,7 +6,7 @@ import Navbar from "./components/navbar.component";
 import JournalEntries from "./components/journal-entries.component";
 import EditJournal from "./components/edit-journal.component";
 import CreateJournal from "./components/create-journal.component";
-import CreateUser from "./components/create-journal.component";
+import CreateUser from "./components/create-user.component";
 
 function App() {
   return (
