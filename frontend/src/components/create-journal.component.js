@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -25,10 +26,18 @@ export default class CreateJournal extends Component {
 
     // Method for username drop down (currently a stub)
     componentDidMount() {
-        this.setState({
-            users: ['test user'],
-            username: 'test user',
-        });
+        axios.get('http://localhost:5000/user/')
+            .then(res => {
+                if (res.data.length > 0) {
+                    this.setState({
+                        users: res.data.map(user => user.username),
+                        username: res.data[0].username
+                    });
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     }
 
     // Methods to update the state
@@ -62,11 +71,14 @@ export default class CreateJournal extends Component {
         const journal = {
             username: this.state.username,
             technique: this.state.technique,
-            duration: this.state.duration,
+            rolling: this.state.rolling,
             date: this.state.date
         };
 
         console.log(journal);
+
+        axios.post('http://localhost:5000/journal/add', journal)
+            .then(res => console.log(res.data));
 
         window.location = '/';
     }
