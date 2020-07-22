@@ -24,7 +24,7 @@ export default class CreateJournal extends Component {
         }
     }
 
-    // Method for username drop down (currently a stub)
+    // Method for username drop down
     componentDidMount() {
         axios.get('http://localhost:5000/user/')
             .then(res => {
